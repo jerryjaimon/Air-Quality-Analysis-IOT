@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>IoT Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+text-align:center;
+background: #360033;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #0b8793, #360033);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #0b8793, #360033); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  
+}
+
+/* Style the top navigation bar */
+.navbar {
+  overflow: hidden;
+  
+background-color:black;
+
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+padding:20px;
+text-align:center;
+}
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+/* Style of the card*/
+#myDiv {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 350px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+
+
+}
+
+/*card value info*/
+#myIv{
+  border: none;
+ font-family: Arial, Helvetica, sans-serif;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+}
+#myDit {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 350px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+
+
+}
+
+/*card value info*/
+#myIvt{
+  border: none;
+ font-family: Arial, Helvetica, sans-serif;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+}
+#myDiy {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 350px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(255, 255, 255);
+
+
+}
+
+/*card value info*/
+#myIvy{
+  border: none;
+ font-family: Arial, Helvetica, sans-serif;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+}
+
+
+/* Footer */
+.footer {
+  padding: 35px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #000000;
+  color: white;
+  font-size: 9px;
+}
+
+</style>
+<script>
+      var value=0;
+      var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+      targetUrl = "https://demo.thingsboard.io/api/v1/QyXLfVSETTM67KD5UMji/attributes?clientKeys=shjvalue"
+      fetch(proxyUrl + targetUrl)
+        .then(blob => blob.json())
+        .then(data => {
+          console.table(data);
+          document.querySelector("pre").innerHTML = `Pollution Level: ${data.client.shjvalue} ppm`;
+          value = data.client.shjvalue;  
+          if(value <=50){
+            document.getElementById("myDiv").style.backgroundColor= "#33cc33";
+            document.getElementById("myIv").innerHTML="Good";
+          }
+          else if (value>=51&&value<=100)
+          {
+            document.getElementById("myDiv").style.backgroundColor = "#d2ff4d";
+            document.getElementById("myIv").innerHTML="MODERATE";
+          }
+          else if (value>=100&&value<=150)
+          {
+            document.getElementById("myDiv").style.backgroundColor = "#ffff00";
+            document.getElementById("myIv").innerHTML="UNHEALTHY FOR SENSITIVE GROUP";
+          }
+          else if (value>=151&&value<=200)
+          {
+            document.getElementById("myDiv").style.backgroundColor = "#ffcc00";
+            document.getElementById("myIv").innerHTML="UNHEALTHY";
+          }
+          else if (value>=201&&value<=300)
+          {
+            document.getElementById("myDiv").style.backgroundColor = "#ff9900";
+            document.getElementById("myIv").innerHTML="VERY UNHEALTHY";
+          }
+          else if (value>=301&&value<=500)
+          {
+            document.getElementById("myDiv").style.backgroundColor = "#ff0000";
+            document.getElementById("myIv").innerHTML="HAZARDOUS";
+          }
+          
+          return data;
+        })
+        .catch(e => {
+          console.log(e);
+          return e;
+        });
+</script>
+<script>
+ var val1=0;
+      var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+      targetUrl = "https://demo.thingsboard.io/api/v1/QyXLfVSETTM67KD5UMji/attributes?clientKeys=mysorevalue"
+      fetch(proxyUrl + targetUrl)
+        .then(blob => blob.json())
+        .then(data => {
+          console.table(data);
+          document.getElementById("myDit").querySelector("pre").innerHTML = `Pollution Level: ${data.client.mysorevalue} ppm`;
+          val1 = data.client.mysorevalue;  
+          if(val1 <=50){
+            document.getElementById("myDit").style.backgroundColor= "#33cc33";
+            document.getElementById("myIvt").innerHTML="Good";
+          }
+          else if (val1 >=51&&val1<=100)
+          {
+            document.getElementById("myDit").style.backgroundColor = "#d2ff4d";
+            document.getElementById("myIvt").innerHTML="MODERATE";
+          }
+          else if (val1 >=100&&val1<=150)
+          {
+            document.getElementById("myDit").style.backgroundColor = "#ffff00";
+            document.getElementById("myIvt").innerHTML="UNHEALTHY FOR SENSITIVE GROUP";
+          }
+          else if (val1 >=151&&val1<=200)
+          {
+            document.getElementById("myDit").style.backgroundColor = "#ffcc00";
+            document.getElementById("myIvt").innerHTML="UNHEALTHY";
+          }
+          else if (val1 >=201&&val1<=300)
+          {
+            document.getElementById("myDit").style.backgroundColor = "#ff9900";
+            document.getElementById("myIvt").innerHTML="VERY UNHEALTHY";
+          }
+          else if (val1 >=301&&val1<=500)
+          {
+            document.getElementById("myDit").style.backgroundColor = "#ff0000";
+            document.getElementById("myIvt").innerHTML="HAZARDOUS";
+          }
+          
+          return data;
+        })
+        .catch(e => {
+          console.log(e);
+          return e;
+        });
+</script>
+<script>
+var val2=0;
+      var proxyUrl = 'https://cors-anywhere.herokuapp.com/',
+      targetUrl = "https://demo.thingsboard.io/api/v1/QyXLfVSETTM67KD5UMji/attributes?clientKeys=delhivalue"
+      fetch(proxyUrl + targetUrl)
+        .then(blob => blob.json())
+        .then(data => {
+          console.table(data);
+          document.getElementById("myDiy").querySelector("pre").innerHTML = `Pollution Level: ${data.client.delhivalue} ppm`;
+          val2 = data.client.delhivalue;  
+          if(val2 <=50){
+            document.getElementById("myDiy").style.backgroundColor= "#33cc33";
+            document.getElementById("myIvy").innerHTML="Good";
+          }
+          else if (val2>=51&&val2<=100)
+          {
+            document.getElementById("myDiy").style.backgroundColor = "#d2ff4d";
+            document.getElementById("myIvy").innerHTML="MODERATE";
+          }
+          else if (val2>=100&&val2<=150)
+          {
+            document.getElementById("myDiy").style.backgroundColor = "#ffff00";
+            document.getElementById("myIvy").innerHTML="UNHEALTHY FOR SENSITIVE GROUP";
+          }
+          else if (val2>=151&&val2<=200)
+          {
+            document.getElementById("myDiy").style.backgroundColor = "#ffcc00";
+            document.getElementById("myIvy").innerHTML="UNHEALTHY";
+          }
+          else if (val2>=201&&val2<=300)
+          {
+            document.getElementById("myDiy").style.backgroundColor = "#ff9900";
+            document.getElementById("myIvy").innerHTML="VERY UNHEALTHY";
+          }
+          else if (val2>=301&&val2<=500)
+          {
+            document.getElementById("myDiy").style.backgroundColor = "#ff0000";
+            document.getElementById("myIvy").innerHTML="HAZARDOUS";
+          }
+          
+          return data;
+        })
+        .catch(e => {
+          console.log(e);
+          return e;
+        });
+    </script>
+</head>
+<body>
+<div class="navbar">
+  <a>Air Quality Monitoring System</a>
+</div>
+<div class="row">
+<div class="main">
+<h2>LOCATIONS</h2>
+<div class="column">
+ 
+    
+    <div id="myDiv">
+  <img src="https://www.europeanceo.com/wp-content/uploads/2017/07/E01.jpg" style="width:100%">
+  <h1 align="center">SHARJAH</h1>
+    <b  align="center"><pre>Getting values..</pre></b>
+
+  <p><div id=myIv>Stay safe</div></p>
+</div>
+</div>
+<div class="column">
+<div id="myDit">
+  <img src="https://www.travelplanet.in/wp-content/uploads/2018/01/Source-AKBARCAB-mysore-800x600.jpg" style="width:100%">
+  <h1 align="center">MYSORE</h1>
+    <b  align="center"><pre>Getting values..</pre></b>
+
+  <p><div id=myIvt>Stay safe</div></p>
+</div>
+</div>
+<div class="column">
+<div id="myDiy">
+  <img src="https://www.imltravel.com/wp-content/uploads/2017/02/Extravagant-Delhi-Day-Tour-India-Gate-IML-Travel-800x600.jpg" style="width:100%">
+  <h1 align="center">DELHI</h1>
+    <b  align="center"><pre>Getting values..</pre></b>
+
+  <p><div id=myIvy>Stay safe</div></p>
+</div>
+    </div>
+</div>
+</div>
+<div class="footer">
+  <h2>Alert quality index :</h2>
+   <h3>[GOOD : 0-50] [MODERATE : 51-100] [UNHEALTHY FOR SENSITIVE GROUPS : 100-150] [UNHEALTHY : 151-200] [VERY UNHEALTHY : 201-300] [HAZARDOUS : 301-500]</h3>
+</div>
+</body>
+</html>
